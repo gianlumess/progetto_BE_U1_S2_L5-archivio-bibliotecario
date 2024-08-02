@@ -18,12 +18,14 @@ public class Application {
     public static void main(String[] args) {
         Application archivio = new Application(); //creo la variabile archivio che è un arrayList di Documenti
 
+        archivio.archivio.add(new Libro("tr46433", "cime tempestose", 1847, 300, "Emily Bronte", "romanzo"));
+        archivio.archivio.add(new Libro("sd35356", "Harry Potter e la pietra filosofale", 1997, 350, "Rowling", "fantasy"));
+        archivio.archivio.add(new Libro("gh42453", "Harry Potter e il calice di fuoco", 2000, 400, "Rowling", "fantasy"));
+        
         Scanner scanner = new Scanner(System.in); //creo lo scanner per ottenere i dati dall'utente
         System.out.println("Benvenuto nell'archivio bibliotecario!!");
         while (true) {
             try {
-
-
                 System.out.println("Scegli cosa fare:");
                 System.out.println("1: Aggiungi un documento");
                 System.out.println("2: Rimuovi un documento");
@@ -83,8 +85,10 @@ public class Application {
                                 case 3:
                                     periodicita = Periodicita.SEMESTRALE;
                                     break;
+                                default:
+                                    System.out.println("Inserimento non valido, riprova.");
                             }
-                            //dopo aver ottenuto i faccio un istanza di una rivista
+                            //dopo aver ottenuto i dati faccio un istanza di una rivista
                             Rivista rivista = new Rivista(ibsn, titolo, annoPubblicazione, numPag, periodicita);
                             //inserisco la rivista nell'arrayList
                             archivio.aggiungiElemento(rivista);
@@ -123,6 +127,7 @@ public class Application {
                         break;
                     case 6:
                         scanner.close();
+                        System.exit(0);
                     default:
                         System.out.println("Inserimento non valido, riprova!");
                 }
