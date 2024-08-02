@@ -7,7 +7,7 @@ public class Rivista extends Documento {
     private Periodicita periodicita;
 
     //COSTRUTTORE
-    public Rivista(long isbn, String titolo, int annoPubblicazione, int numPagine, Periodicita periodicita) {
+    public Rivista(String isbn, String titolo, int annoPubblicazione, int numPagine, Periodicita periodicita) {
         super(isbn, titolo, annoPubblicazione, numPagine);
         this.periodicita = periodicita;
     }
@@ -19,5 +19,12 @@ public class Rivista extends Documento {
 
     public void setPeriodicita(Periodicita periodicita) {
         this.periodicita = periodicita;
+    }
+
+    @Override
+    public String toString() {
+        return "Rivista{" +
+                "periodicita=" + periodicita +
+                '}';
     }
 }
