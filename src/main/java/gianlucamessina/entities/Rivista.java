@@ -25,6 +25,10 @@ public class Rivista extends Documento {
     public String toString() {
         return "Rivista{" +
                 "periodicita=" + periodicita +
+                ", isbn='" + isbn + '\'' +
+                ", titolo='" + titolo + '\'' +
+                ", annoPubblicazione=" + annoPubblicazione +
+                ", numPagine=" + numPagine +
                 '}';
     }
 }

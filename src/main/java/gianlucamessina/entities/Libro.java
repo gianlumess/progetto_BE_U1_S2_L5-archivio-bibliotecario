@@ -26,6 +26,10 @@ public class Libro extends Documento {
         return "Libro{" +
                 "autore='" + autore + '\'' +
                 ", genere='" + genere + '\'' +
+                ", isbn='" + isbn + '\'' +
+                ", titolo='" + titolo + '\'' +
+                ", annoPubblicazione=" + annoPubblicazione +
+                ", numPagine=" + numPagine +
                 '}';
     }
 }
