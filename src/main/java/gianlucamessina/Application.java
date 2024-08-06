@@ -4,7 +4,11 @@ import gianlucamessina.entities.Documento;
 import gianlucamessina.entities.Libro;
 import gianlucamessina.entities.Rivista;
 import gianlucamessina.enums.Periodicita;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -21,7 +25,7 @@ public class Application {
         archivio.archivio.add(new Libro("tr46433", "cime tempestose", 1847, 300, "Emily Bronte", "romanzo"));
         archivio.archivio.add(new Libro("sd35356", "Harry Potter e la pietra filosofale", 1997, 350, "Rowling", "fantasy"));
         archivio.archivio.add(new Libro("gh42453", "Harry Potter e il calice di fuoco", 2000, 400, "Rowling", "fantasy"));
-        
+
         Scanner scanner = new Scanner(System.in); //creo lo scanner per ottenere i dati dall'utente
         System.out.println("Benvenuto nell'archivio bibliotecario!!");
         while (true) {
@@ -127,6 +131,7 @@ public class Application {
                         break;
                     case 6:
                         scanner.close();
+                        archivio.salvaSuDisco();
                         System.exit(0);
                     default:
                         System.out.println("Inserimento non valido, riprova!");
@@ -160,5 +165,18 @@ public class Application {
 
     public List<Libro> ricercaPerAutore(String autore) {
         return archivio.stream().filter(documento -> documento instanceof Libro && Objects.equals(((Libro) documento).getAutore(), autore)).map(documento -> (Libro) documento).collect(Collectors.toList());
+    }
+
+    public void salvaSuDisco() {
+        File file = new File("src/archivio.txt");
+        try {
+            FileUtils.writeStringToFile(file, archivio.toString() + System.lineSeparator(), StandardCharsets.UTF_8, true);
+            String content = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+            String[] contentAsArray = content.split(System.lineSeparator());
+            System.out.println(Arrays.toString(contentAsArray));
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
