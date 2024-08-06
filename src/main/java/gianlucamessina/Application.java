@@ -36,7 +36,8 @@ public class Application {
                 System.out.println("3: Ricerca un documento per ISBN");
                 System.out.println("4: Ricerca un documento per anno di pubblicazione");
                 System.out.println("5: Ricerca un documento per Autore");
-                System.out.println("6: Esci dal programma");
+                System.out.println("6: Visualizza archivio presente nel disco");
+                System.out.println("7: Esci dal programma");
                 int sceltaUtente = Integer.parseInt(scanner.nextLine());
 
                 switch (sceltaUtente) {
@@ -130,6 +131,9 @@ public class Application {
                         }
                         break;
                     case 6:
+
+                        archivio.caricaDalDisco();
+                    case 7:
                         scanner.close();
                         archivio.salvaSuDisco();
                         System.exit(0);
@@ -171,12 +175,24 @@ public class Application {
         File file = new File("src/archivio.txt");
         try {
             FileUtils.writeStringToFile(file, archivio.toString() + System.lineSeparator(), StandardCharsets.UTF_8, true);
-            String content = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
-            String[] contentAsArray = content.split(System.lineSeparator());
-            System.out.println(Arrays.toString(contentAsArray));
+
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void caricaDalDisco() {
+        File archivioFile = FileUtils.getFile("src/archivio.txt");
+
+        String content = null;
+        try {
+            content = FileUtils.readFileToString(archivioFile, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        String[] contentAsArray = content.split(System.lineSeparator());
+        System.out.println(Arrays.toString(contentAsArray));
     }
 }
